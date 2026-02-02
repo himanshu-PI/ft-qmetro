@@ -5,12 +5,15 @@ import sinter
 from typing import List
 import matplotlib.pyplot as plt
 from joblib import Parallel, delayed
+import matplotlib
+matplotlib.use("TkAgg")  # or "Qt5Agg"
+
 
 import matplotlib.pyplot as plt
 plt.rcParams['font.family'] = 'sans-serif'
 plt.rcParams['text.color'] = 'k'
 plt.rcParams['axes.labelcolor'] = 'k'
-plt.rcParams['text.usetex'] = True
+plt.rcParams['text.usetex'] = False
 
 pal = ["003049","d62828","f77f00","fcbf49","eae2b7"]
 pal = ['#' + i for i in pal]

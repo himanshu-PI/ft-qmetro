@@ -216,10 +216,10 @@ print('Generating plots...')
 
 
 import matplotlib
-matplotlib.use("Agg")  # or "Qt5Agg"
+matplotlib.use("TkAgg")  # or "Qt5Agg"
 
 import matplotlib.pyplot as plt
-plt.rcParams['text.usetex'] = True
+plt.rcParams['text.usetex'] = False
 
 pal = ["003049","d62828","f77f00","fcbf49","eae2b7"]
 pal = ['#' + i for i in pal]
@@ -227,7 +227,7 @@ pal = ['#' + i for i in pal]
 marks = ['o', 's', '^', 'D', 'v', '>', '<', 'p', '*', 'h', 'H', '+', 'x']
 import seaborn as sns
 
-from matplotlib import font_manager
+
 import matplotlib as mpl
 
 num_shots = 20_000
@@ -247,8 +247,6 @@ fig, ax = plt.subplots(figsize = (5,4))
 pal = sns.color_palette("rocket_r", n_colors=len(d))
 
 mpl.rcParams['font.family'] = 'sans-serif'
-mpl.rcParams['font.sans-serif'] = ['Google Sans']
-
 
 for i in range(len(d)):
 

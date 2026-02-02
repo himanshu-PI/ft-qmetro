@@ -19,3 +19,6 @@ six==1.17.0
 stim==1.15.0
 tqdm==4.66.6
 tzdata==2025.3
+ipykernet==7.1.0
+ipython==9.10.0
+PyQt6=6.10.2

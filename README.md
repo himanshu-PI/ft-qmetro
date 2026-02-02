@@ -5,16 +5,16 @@ The project requires ``python >=3.10``.
 clone repo
 ```bash
 git clone https://github.com/himanshu-PI/ft-qmetro.git
-```
-```bash
 cd ft-qmetro
 ```
 create a virtual environment
 ```bash
 python -m venv ft-qmetro
+source ft-qmetro/bin/activate
 ```
 install dependencies
 ```bash
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
