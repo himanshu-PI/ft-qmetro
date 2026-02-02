@@ -16,7 +16,7 @@ def estimate_mean_sq_phase(qubit_error: float, measurement_error: float, distanc
 
     matching = Matching(H)
     
-    average_phase = 0
+    av_msp = 0
     
     for _ in range(num_shots):
 
@@ -79,81 +79,28 @@ def estimate_mean_sq_phase(qubit_error: float, measurement_error: float, distanc
         
         phase = np.abs(np.count_nonzero(error == 0) - np.count_nonzero(error == 1))
 
-        average_phase += pow(phase, 2)/num_shots
+        av_msp += pow(phase, 2)/num_shots
         
-    return average_phase 
+    return av_msp 
+
+
+print("\033[31mCaution\033[0m", ': The data is being generated for smaller number for shots for quick results. You can change its value to higher value on the script.')
+
+
+print("\033[31mCaution\033[0m", ': The data is being generated for smaller range of system sizes for quick results. You can change its range to higher value on the scrip.')
 
 
 
-# num_shots = 20_000
-
-# p = np.linspace(0.01,0.1,10)
-
-# d = np.array([7, 15, 21 , 35, 42], dtype = int)
-# L = np.array(5*np.ceil(np.log(d)), dtype = int)
-
-# phases = np.zeros((len(p), len(d)), dtype = float)
-
-
-# for i in tqdm(range(len(p))):
-#     for j in range(len(d)):
-#         phases[i,j] = estimate_mean_sq_phase(p[i],p[i],d[j],L[j],num_shots)
-
-
-# np.savetxt('mean-sq-phase-log-p_eq_q.txt', phases)
-
-
-
-# p = 0.045
-# dp = 0.001
-
-# d1 = 21; d2 = 42
-# num_shots = 20_000
-
-# r1 = np.sqrt(estimate_mean_sq_phase(p,p,d1,int(5*np.ceil(np.log(d1))),num_shots)/d1**2)
-# r2 = np.sqrt(estimate_mean_sq_phase(p,p,d2,int(5*np.ceil(np.log(d2))),num_shots)/d2**2)
-
-# while (r2-r1)>= 0:
-
-#     p += dp
-
-#     r1 = np.sqrt(estimate_mean_sq_phase(p,p,d1,int(5*np.ceil(np.log(d1))),num_shots)/d1**2)
-#     r2 = np.sqrt(estimate_mean_sq_phase(p,p,d2,int(5*np.ceil(np.log(d2))),num_shots)/d2**2)
-
-#     print(p)
-  
-
-
-# num_shots = 20_000
-
-# p = 0.04
-
-# # d = np.array([7,  35, 61, 95, 121, 155, 181, 215, 241, 275], dtype = int) 
-
-# d = 2**(np.arange(3, 11, 1))
-
-# L = np.array(5*np.ceil(np.log(d)), dtype = int)
-
-# phases = np.zeros(len(d), dtype = float)
-
-
-# for j in tqdm(range(len(d))):
-#     phases[j] = estimate_mean_sq_phase(p, p, d[j], L[j], num_shots)
-
-
-# np.savetxt(f'data/msp-p-{p}-v2.txt', phases)
-
-
-
-num_shots = 20_000
+num_shots = 5000
 
 p = 0.1
 
-# d = np.array([7,  35, 61, 95, 121, 155, 181, 215, 241, 275], dtype = int) 
+print(f'Generating average mean square phase at p = {p} ...')
 
 # d = 2**(np.arange(3, 11, 1))
 
-d = np.array(np.ceil(2**(np.linspace(3,10,20))),dtype = int)
+d = 2**(np.arange(3, 9, 1))
+
 
 L = np.array(5*np.ceil(np.log(d)), dtype = int)
 
@@ -163,5 +110,45 @@ phases = np.zeros(len(d), dtype = float)
 for j in tqdm(range(len(d))):
     phases[j] = estimate_mean_sq_phase(p, p, d[j], L[j], num_shots)
 
-np.savetxt(f'data/msp-p-{p}-v3.txt', phases)
+np.savetxt(f'data/msp-p-{p}.txt', phases)
 
+print('Data saved.')
+
+p = 0.04
+
+print(f'Generating average mean square phase at p = {p} ...')
+
+d = 2**(np.arange(3, 9, 1))
+
+# d = 2**(np.arange(3, 11, 1)) # uncomment for higher range
+
+
+L = np.array(5*np.ceil(np.log(d)), dtype = int)
+
+phases = np.zeros(len(d), dtype = float)
+
+
+for j in tqdm(range(len(d))):
+    phases[j] = estimate_mean_sq_phase(p, p, d[j], L[j], num_shots)
+
+np.savetxt(f'data/msp-p-{p}.txt', phases)
+
+
+print('Generating data for the mean square phase scaling below threshold...')
+
+num_shots = 5000
+
+p = [0.01, 0.02, 0.03, 0.04, 0.05]
+
+d = np.array([10, 20, 50, 75, 100, 150],dtype = int)
+L = np.array(5*np.ceil(np.log(d)), dtype = int)
+
+phases = np.zeros((len(p), len(d)), dtype = float)
+
+for i in tqdm(range(len(p))):
+    for j in range(len(d)):
+        phases[i,j] = estimate_mean_sq_phase(p[i],p[i],d[j],L[j],num_shots)
+
+
+np.savetxt('data/mean_sq_phases_below_threshold.txt', phases)
+print('Data saved.')

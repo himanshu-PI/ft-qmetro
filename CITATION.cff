@@ -1,0 +1,40 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: >-
+  Code scripts for 'Achieving the Heisenberg limit using
+  fault-tolerant quantum error correction'
+message: >-
+  If you use this dataset, please cite it using the metadata
+  from this file.
+type: dataset
+authors:
+  - given-names: 'Himanshu '
+    family-names: Sahu
+    email: hsahu@perimeterinstitute.ca
+    affiliation: >-
+      Perimeter Institute for Theoretical Physics;
+      University of Waterloo
+    orcid: 'https://orcid.org/0000-0002-9522-6592'
+  - {}
+  - given-names: Sisi
+    family-names: Zhou
+    affiliation: >-
+      Perimeter Institute for Theoretical Physics;
+      University of Waterloo
+  - given-names: Qian
+    family-names: Xu
+    affiliation: Caltech
+identifiers:
+  - type: doi
+    value: 10.48550/arXiv.2601.05457
+    description: arXiv
+repository-code: 'https://github.com/himanshu-PI/ft-qmetro/'
+abstract: >-
+  This repository contains python code scripts for the
+  numerical results presented in paper 2601.05457
+keywords:
+  - quantum error correction
+  - quantum metrology
+license: MIT
