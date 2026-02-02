@@ -215,6 +215,9 @@ print('Generating plots...')
 
 
 
+import matplotlib
+matplotlib.use("Agg")  # or "Qt5Agg"
+
 import matplotlib.pyplot as plt
 plt.rcParams['text.usetex'] = True
 
@@ -398,9 +401,7 @@ font1 = {'family':'serif', 'color':'black', 'size':22}
 font2 = {'family':'serif', 'color':'black', 'size':18}
 plt.xlabel(r"Error rate $\mathsf{p}$", color = 'black', fontdict=font2)
 plt.ylabel(r"$\gamma$", fontdict=font1)
-
 plt.show()
-
 
 
 
