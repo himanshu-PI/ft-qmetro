@@ -1,13 +1,21 @@
 Python scripts for [Achieving the Heisenberg limit using fault-tolerant quantum error correction](https://arxiv.org/abs/2601.05457)
 
 ## Installation
-This repository uses [Conda](https://www.anaconda.com/docs/getting-started/miniconda/main) to manage dependencies.
-
+The project requires ``python >=3.10``.  
+clone repo
 ```bash
 git clone https://github.com/himanshu-PI/ft-qmetro.git
+```
+```bash
 cd ft-qmetro
-conda env create -f env.yml
-conda activate ft-qmetro
+```
+create a virtual environment
+```bash
+python -m venv ft-qmetro
+```
+install dependencies
+```bash
+pip install -r requirements.txt
 ```
 
 ## Repository Structure
