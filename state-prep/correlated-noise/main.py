@@ -187,9 +187,38 @@ for j in range(len(d)):
         phase[i] = estimate_msp(p[i], p[i], p2[i], p[i], d[j], L[j] ,num_shots)
     phases.append(phase)
 
-np.savetxt('msp.txt', phases)
+np.savetxt('data/msp.txt', phases)
 
 print('Data saved.')
+
+
+print('Finding threshold...')
+
+
+p = 0.06
+dp = 0.001
+p2 = p/5
+d1 = 21; d2 = 42
+num_shots = 20000
+
+
+r1 = np.sqrt(estimate_msp(p, p, p2, p, d1, 5*np.ceil(np.log(d1)) ,num_shots)/d1**2)
+r2 = np.sqrt(estimate_msp(p, p, p2, p, d2, 5*np.ceil(np.log(d1)) ,num_shots)/d2**2)
+
+print('average mean square phase value at system size 21 and 42, respectively')
+
+print(r1, r2)
+
+while (r2-r1)>= 0:
+
+    p += dp
+    r1 = np.sqrt(estimate_msp(p, p, p2, p, d1, 5*np.ceil(np.log(d1)) ,num_shots)/d1**2)
+    r2 = np.sqrt(estimate_msp(p, p, p2, p, d2, 5*np.ceil(np.log(d1)) ,num_shots)/d2**2)
+
+    print(r1, r2)
+
+print('Cross-over found at ', p)
+
 
 print('Generating plot...')
 
@@ -231,5 +260,5 @@ plt.xlabel("Physical error rate $p$",fontdict = font2)
 plt.ylabel(r"$m_\mathrm{rms}/n$",fontdict = font2)
 plt.legend(fontsize  = 15, ncol = 1, loc = 'best', frameon = False)
 # plt.savefig('msp-correlated.svg',dpi = 500, bbox_inches='tight')
-plt.savefig('msp-correlated.png',dpi = 500, bbox_inches='tight')
+plt.savefig('data/msp-correlated.png',dpi = 500, bbox_inches='tight')
 plt.show()
