@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+
+# Poetry
+.poetry/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data (adjust if needed)
+data/raw/*
+!data/raw/README.md
+
