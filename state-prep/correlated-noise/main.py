@@ -179,17 +179,15 @@ d = np.array([7, 21 , 35, 41, 55], dtype = int)
 L =  np.array(5*np.ceil(np.log(d)), dtype = int)
 # L = np.copy(d) 
 
-phases = []
+# phases = np.zeros((len(d), len(p)), dtype = float)
 
-for j in range(len(d)):
-    phase = np.zeros_like(p,dtype = float)
-    for i in tqdm(range(len(p))):
-        phase[i] = estimate_msp(p[i], p[i], p2[i], p[i], d[j], L[j] ,num_shots)
-    phases.append(phase)
+# for j in range(len(d)):
+#     for i in tqdm(range(len(p))):
+#         phases[j,i] = estimate_msp(p[i], p[i], p2[i], p[i], d[j], L[j] ,num_shots)
 
-np.savetxt('data/msp.txt', phases)
+# np.savetxt('data/msp.txt', phases)
 
-print('Data saved.')
+# print('Data saved.')
 
 
 print('Finding threshold...')
@@ -202,8 +200,8 @@ d1 = 21; d2 = 42
 num_shots = 20000
 
 
-r1 = np.sqrt(estimate_msp(p, p, p2, p, d1, 5*np.ceil(np.log(d1)) ,num_shots)/d1**2)
-r2 = np.sqrt(estimate_msp(p, p, p2, p, d2, 5*np.ceil(np.log(d1)) ,num_shots)/d2**2)
+r1 = np.sqrt(estimate_msp(p, p, p2, p, d1, int(5*np.ceil(np.log(d1))) ,num_shots)/d1**2)
+r2 = np.sqrt(estimate_msp(p, p, p2, p, d2, int(5*np.ceil(np.log(d2))) ,num_shots)/d2**2)
 
 print('average mean square phase value at system size 21 and 42, respectively')
 
@@ -212,8 +210,8 @@ print(r1, r2)
 while (r2-r1)>= 0:
 
     p += dp
-    r1 = np.sqrt(estimate_msp(p, p, p2, p, d1, 5*np.ceil(np.log(d1)) ,num_shots)/d1**2)
-    r2 = np.sqrt(estimate_msp(p, p, p2, p, d2, 5*np.ceil(np.log(d1)) ,num_shots)/d2**2)
+    r1 = np.sqrt(estimate_msp(p, p, p2, p, d1, int(5*np.ceil(np.log(d1))) ,num_shots)/d1**2)
+    r2 = np.sqrt(estimate_msp(p, p, p2, p, d2, int(5*np.ceil(np.log(d2))) ,num_shots)/d2**2)
 
     print(r1, r2)
 
@@ -222,6 +220,8 @@ print('Cross-over found at ', p)
 
 print('Generating plot...')
 
+phase = np.loadtxt('data/msp.txt')
+p = np.linspace(0.001,0.06,10)
 fig, ax = plt.subplots(figsize = (5,3.5))
 
 import seaborn as sns
@@ -230,7 +230,7 @@ pal = sns.color_palette("rocket_r", n_colors=len(d))
 
 for i in range(len(d)):
 
-    phase = phases[i]
+    phase = phases[i, :]
     
     ax.plot(
         p, np.sqrt(phase/d[i]**2),
