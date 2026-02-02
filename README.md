@@ -1,25 +1,54 @@
+Python scripts for [Achieving the Heisenberg limit using fault-tolerant quantum error correction](https://arxiv.org/abs/2601.05457)
+
 ## Installation
-This repository uses [Poetry](https://python-poetry.org/) to manage dependencies.
+This repository uses [Conda](https://www.anaconda.com/docs/getting-started/miniconda/main) to manage dependencies.
+
 ```bash
-poetry install
+git clone https://github.com/himanshu-PI/ft-qmetro.git
+cd ft-qmetro
+conda env create -f env.yml
+conda activate ft-qmetro
+```
+
+## Repository Structure
+```
+.
+├── fi/                     # Fisher Information Calculation
+│   ├── data/
+│   │   └── calc/           # Presaved data 
+│   │       └── .txt
+│   ├── essential.py        # helper functions
+│   ├── fi.py               # calculates FI
+│   └── mean-sq-phase.py    # calculates average mean square magnetization for FI
+├── state-prep/
+│   ├── correlated-noise/   # case study : correlated noise
+│   │   ├── data/       
+│   │   │   └── .txt
+│   │   ├── funcs.py        # helper functions
+│   │   └── main.py         # calcualtes average mean square magnetization
+│   ├── data/
+│   │   └── calc/`          # presaved data
+│   │       └── .txt
+│   ├── essential.py        # helper functions
+│   └── mean-sq-phase.py    # calcualtes average mean square magnetization
+├── CITATION.cff
+├── LICENSE
+├── env.yml
+└── README.md
 ```
 
 
 ## Usage
 
+- Calculate average mean square magnetization 
+    ```bash
+    cd state-prep
+    python mean-sq-phase.py
+    ```
+- Calculate Fisher information
+    ```bash
+    cd fi
+    python mean-sq-phase.py
+    python fi.py
+    ```
 
-
-
-
-
-
-
-## License
-
-Copyright (c) [2026] [Himanshu Sahu]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

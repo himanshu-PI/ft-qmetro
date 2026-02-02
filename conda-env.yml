@@ -199,9 +199,6 @@ dependencies:
       - pythreejs==2.4.2
       - pytz==2025.1
       - pyvis==0.3.2
-      - qiskit==1.2.4
-      - qiskit-aer==0.15.1
-      - qsurface==0.1.5
       - referencing==0.36.2
       - rpds-py==0.24.0
       - rustworkx==0.15.1
